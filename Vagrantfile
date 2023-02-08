@@ -13,6 +13,12 @@ Vagrant.configure("2") do |config|
 
       vm.vm.box = confs[:box]
 
+      # VirtualBox settings
+      vm.vm.provider 'virtualbox' do |virtualbox|
+        virtualbox.memory = 448
+        virtualbox.cpus = 1
+      end
+
     end
   end
 
