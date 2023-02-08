@@ -1,7 +1,10 @@
 ---
 standalone:
   :box: 'bento/centos-7'
+  :ip: '192.168.56.4'
 controller:
   :box: 'bento/centos-7'
+  :ip: '192.168.56.5'
 managed:
   :box: 'bento/centos-7'
+  :ip: '192.168.56.6'
