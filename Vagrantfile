@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
   VMS.each do |name, confs|
     config.vm.define name do |vm|
 
-      vm.vm.box = confs[:box]
+      vm.vm.box = 'bento/centos-7'
 
       # VirtualBox settings
       vm.vm.provider 'virtualbox' do |virtualbox|
