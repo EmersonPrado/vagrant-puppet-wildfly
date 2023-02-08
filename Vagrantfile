@@ -24,6 +24,13 @@ Vagrant.configure("2") do |config|
         shell.path = 'bin/install_puppet.sh'
       end
 
+      vm.vm.provision :puppet do |puppet|
+        puppet.manifests_path = 'manifests'
+        puppet.module_path = 'modules'
+        puppet.hiera_config_path = 'hiera.yaml'
+        puppet.working_directory = '/tmp/vagrant-puppet'
+      end
+
     end
   end
 
