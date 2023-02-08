@@ -19,6 +19,11 @@ Vagrant.configure("2") do |config|
         virtualbox.cpus = 1
       end
 
+      vm.vm.provision :shell do |shell|
+        shell.name = 'Install Puppet'
+        shell.path = 'bin/install_puppet.sh'
+      end
+
     end
   end
 
