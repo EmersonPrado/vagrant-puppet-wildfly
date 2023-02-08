@@ -1,0 +1,3 @@
+---
+standalone:
+  :box: 'bento/centos-7'
