@@ -4,6 +4,7 @@
 
 1. [Description](#description)
 1. [Usage](#usage)
+1. [Limitations](#limitations)
 
 ## Description
 
@@ -35,3 +36,9 @@ This project contains a Vagrant configuration which configures a set of VMs aime
     - Erase wih `vagrant destroy`
 1. Enjoy the installations
     > Access the JBoss web console at &lt;IP&gt;:9990
+
+## Limitations
+
+- Only tested with CentOS (Vagrant box 'bento/centos-7'), Puppet 6 and Java JDK 9.0.1
+- Domain mode VMs still not ready
+- Not much configurable (so far, aims very specific tests)
