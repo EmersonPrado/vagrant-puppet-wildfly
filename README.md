@@ -62,6 +62,14 @@ tcp6       0      0 127.0.0.1:8080          :::*                    LISTEN      
 exit
 ```
 
+Access the [web console](http://192.168.56.4:9990/console/App.html) in your browser
+
+- User: admin
+- Pass: pass
+
+Enter "Runtime" tab
+> There should be server "Standalone Server"
+
 ## Limitations
 
 - Only tested with CentOS (Vagrant box 'bento/centos-7'), Puppet 6 and Java JDK 9.0.1
