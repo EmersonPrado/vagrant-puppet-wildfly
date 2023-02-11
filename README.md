@@ -54,6 +54,7 @@ systemctl status wildfly
 # Answer should contain "Active: active (running)"
 
 sudo netstat -ptln | sed -n '1,2p;/java/p'
+# Answer should be:
 Active Internet connections (only servers)
 Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
 tcp6       0      0 192.168.56.4:9990       :::*                    LISTEN      <PID>/java
