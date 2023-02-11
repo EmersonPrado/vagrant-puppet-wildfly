@@ -17,6 +17,7 @@ Vagrant.configure("2") do |config|
       vm.vm.provider 'virtualbox' do |virtualbox|
         virtualbox.memory = 448
         virtualbox.cpus = 1
+        virtualbox.customize ['modifyvm', :id, '--nicpromisc2', 'allow-all']
       end
 
       # Network settings
