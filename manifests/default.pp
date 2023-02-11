@@ -33,8 +33,18 @@ node /^controller/ {
     host_config    => 'host-master.xml',
     properties     => {
       'jboss.bind.address.management' => $controller_ip,
+      'jboss.management.http.port'    => '9990',        # Needed for wildfly::resource below
     },
+    external_facts => true,
+    before         => Wildfly::Domain::Server_group['main-server-group', 'other-server-group', 'app-server-group'],
     *              => $wildfly_defaults,
+  }
+  wildfly::domain::server_group { ['main-server-group', 'other-server-group']:
+    ensure => absent,
+  }
+  -> wildfly::domain::server_group { 'app-server-group':
+    profile              => 'full-ha',
+    socket_binding_group => 'full-ha-sockets',
   }
   wildfly::config::mgmt_user { 'managed':
     password => 'whatever',
@@ -52,5 +62,14 @@ node /^managed/ {
     },
     secret_value => 'd2hhdGV2ZXIK',     # Base64 encoding for 'whatever'
     *            => $wildfly_defaults,
+  }
+  -> wildfly::host::server_config { ['server-one', 'server-two']:
+    ensure => absent,
+  }
+  -> wildfly::host::server_config { 'app':
+    server_group => 'app-server-group',
+    hostname     => 'managed',
+    username     => 'managed',
+    password     => 'whatever',
   }
 }
