@@ -4,6 +4,8 @@
 
 1. [Description](#description)
 1. [Usage](#usage)
+1. [Validation](#validation)
+    1. [Standalone mode](#standalone-mode)
 1. [Limitations](#limitations)
 
 ## Description
@@ -36,6 +38,29 @@ This project contains a Vagrant configuration which configures a set of VMs aime
     - Erase wih `vagrant destroy`
 1. Enjoy the installations
     > Access the JBoss web console at &lt;IP&gt;:9990
+
+## Validation
+
+### Standalone mode
+
+```Shell
+# In your station
+vagrant up standalone
+vagrant ssh standalone
+
+# Inside VM:
+systemctl status wildfly
+# Answer should contain "Active: active (running)"
+
+sudo netstat -ptln | sed -n '1,2p;/java/p'
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp6       0      0 192.168.56.4:9990       :::*                    LISTEN      <PID>/java
+tcp6       0      0 127.0.0.1:8080          :::*                    LISTEN      <PID>/java
+
+# Remember to close VM SSH session
+exit
+```
 
 ## Limitations
 
