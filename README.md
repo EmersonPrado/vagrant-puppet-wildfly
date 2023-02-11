@@ -109,6 +109,16 @@ PORT     STATE SERVICE
 exit
 ```
 
+Access the [web console](http://192.168.56.5:9990/console/App.html) in your browser
+
+- User: admin
+- Pass: pass
+
+Enter "Runtime" tab
+
+- Hosts: there should be "managed" and "master
+- Server Groups: there should be "app-server-group", with server "app"
+
 ## Limitations
 
 - Only tested with CentOS (Vagrant box 'bento/centos-7'), Puppet 6 and Java JDK 9.0.1
