@@ -39,6 +39,7 @@ node /^controller/ {
 }
 
 node /^managed/ {
+  ensure_packages(['nmap'])
   class { 'wildfly':
     mode        => 'domain',
     host_config => 'host-slave.xml',
