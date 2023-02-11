@@ -40,5 +40,5 @@ This project contains a Vagrant configuration which configures a set of VMs aime
 ## Limitations
 
 - Only tested with CentOS (Vagrant box 'bento/centos-7'), Puppet 6 and Java JDK 9.0.1
-- Domain mode VMs still not ready
+- JGroups still not implemented
 - Not much configurable (so far, aims very specific tests)
