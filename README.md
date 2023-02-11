@@ -122,6 +122,6 @@ Enter "Runtime" tab
 
 ## Limitations
 
-- Only tested with CentOS (Vagrant box 'bento/centos-7'), Puppet 6 and Java JDK 9.0.1
+- Only tested with CentOS (Vagrant box [bento/centos-7](https://app.vagrantup.com/bento/boxes/centos-7)), Puppet 6 and Java JDK 9.0.1
 - JGroups still not implemented
 - Not much configurable (so far, aims very specific tests)
