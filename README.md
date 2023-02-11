@@ -6,6 +6,7 @@
 1. [Usage](#usage)
 1. [Validation](#validation)
     1. [Standalone mode](#standalone-mode)
+    1. [Domain mode](#domain-mode)
 1. [Limitations](#limitations)
 
 ## Description
@@ -69,6 +70,44 @@ Access the [web console](http://192.168.56.4:9990/console/App.html) in your brow
 
 Enter "Runtime" tab
 > There should be server "Standalone Server"
+
+### Domain mode
+
+```Shell
+# In your station
+vagrant up controller managed
+vagrant ssh controller
+
+# Inside VM:
+systemctl status wildfly
+# Answer should contain "Active: active (running)"
+
+sudo netstat -ptln | sed -n '1,2p;/java/p'
+# Answer should be:
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp6       0      0 192.168.56.4:9990       :::*                    LISTEN      <PID>/java
+tcp6       0      0 127.0.0.1:8080          :::*                    LISTEN      <PID>/java
+
+# Remember to close VM SSH session
+exit
+
+# In your station
+vagrant ssh managed
+
+# Inside VM:
+systemctl status wildfly
+# Answer should contain "Active: active (running)"
+
+nmap -p9990,9999 192.168.56.5
+# Answer should contain:
+PORT     STATE SERVICE
+9990/tcp open  osm-appsrvr
+9999/tcp open  abyss
+
+# Remember to close VM SSH session
+exit
+```
 
 ## Limitations
 
