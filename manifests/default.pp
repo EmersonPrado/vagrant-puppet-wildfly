@@ -29,24 +29,28 @@ node /^standalone/ {
 
 node /^controller/ {
   class { 'wildfly':
-    mode        => 'domain',
-    host_config => 'host-master.xml',
-    properties  => {
+    mode           => 'domain',
+    host_config    => 'host-master.xml',
+    properties     => {
       'jboss.bind.address.management' => $controller_ip,
     },
-    *           => $wildfly_defaults,
+    *              => $wildfly_defaults,
+  }
+  wildfly::config::mgmt_user { 'managed':
+    password => 'whatever',
   }
 }
 
 node /^managed/ {
   ensure_packages(['nmap'])
   class { 'wildfly':
-    mode        => 'domain',
-    host_config => 'host-slave.xml',
-    properties  => {
-    'jboss.bind.address.management' => $managed_ip,
-      'jboss.domain.master.address' => $controller_ip,
+    mode         => 'domain',
+    host_config  => 'host-slave.xml',
+    properties   => {
+      'jboss.bind.address.management' => $managed_ip,
+      'jboss.domain.master.address'   => $controller_ip,
     },
-    *           => $wildfly_defaults,
+    secret_value => 'd2hhdGV2ZXIK',     # Base64 encoding for 'whatever'
+    *            => $wildfly_defaults,
   }
 }
