@@ -72,6 +72,8 @@ Access the [web console](http://192.168.56.4:9990/console/App.html) in your brow
 Enter "Runtime" tab
 > There should be server "Standalone Server"
 
+Remember to close the session: Admin -> Logout -> Confirm
+
 ### Domain mode
 
 ```Shell
@@ -119,6 +121,8 @@ Enter "Runtime" tab
 
 - Hosts: there should be "managed" and "master
 - Server Groups: there should be "app-server-group", with server "app"
+
+Remember to close the session: Admin -> Logout -> Confirm
 
 ## Limitations
 
