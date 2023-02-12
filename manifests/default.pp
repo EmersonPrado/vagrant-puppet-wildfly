@@ -15,6 +15,7 @@ $wildfly_defaults = {
   install_cache_dir => $tmp_dir,
   java_home         => '/usr',
   mgmt_user         => { username  => 'admin', password  => 'pass' },
+  require           => [File[$tmp_dir], Class['java']],
 }
 
 # The Admin Console listens to the management interface
