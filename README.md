@@ -120,7 +120,7 @@ Access the [web console](http://192.168.56.5:9990/console/App.html) in your brow
 
 Enter "Runtime" tab
 
-- Hosts: there should be "managed" and "master
+- Hosts: there should be "managed" and "master"
 - Server Groups: there should be "app-server-group", with server "app"
 
 Remember to close the session: Admin -> Logout -> Confirm
