@@ -130,3 +130,18 @@ Remember to close the session: Admin -> Logout -> Confirm
 - Only tested with CentOS (Vagrant box [bento/centos-7](https://app.vagrantup.com/bento/boxes/centos-7)), Puppet 6 and Java JDK 9.0.1
 - JGroups still not implemented
 - Not much configurable (so far, aims very specific tests)
+- Might get some network domain and include in the VMs FQDNs
+- Issues a warning - apparently harmless - after resource `/Stage[main]/Wildfly::Install/File[/tmp/wildfly/wildfly-<Version>.tar.gz]/ensure`:
+
+    ```
+    ==> <MV name>: Warning: Private key for '<MV FQDN>' does not exist
+    ==> <MV name>: Warning: Client certificate for '<MV FQDN>' does not exist
+    ```
+
+- Issues an error - apparently harmless - in managed VM:
+
+    ```
+    ==> managed: Notice: /Stage[main]/Main/Node[__node_regexp__managed]/Wildfly::Host::Server_config[app]/Wildfly_resource[/host=managed/server-config=app]/ensure: created
+    ==> managed: Error: Net::ReadTimeout
+    ==> managed: Error: /Stage[main]/Main/Node[__node_regexp__managed]/Wildfly::Host::Server_config[app]/Wildfly_cli[/host=managed/server-config=app:start(blocking=true)]/executed: change from false to true failed: Net::ReadTimeout
+    ```
