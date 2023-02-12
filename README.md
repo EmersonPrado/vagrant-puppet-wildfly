@@ -90,7 +90,8 @@ sudo netstat -ptln | sed -n '1,2p;/java/p'
 Active Internet connections (only servers)
 Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
 tcp6       0      0 192.168.56.5:9990       :::*                    LISTEN      <PID>/java
-tcp6       0      0 127.0.0.1:8080          :::*                    LISTEN      <PID>/java
+tcp6       0      0 192.168.56.5:9999       :::*                    LISTEN      <PID>/java
+tcp6       0      0 127.0.0.1:<Port>        :::*                    LISTEN      <PID>/java
 
 # Remember to close VM SSH session
 exit
