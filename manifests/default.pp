@@ -65,6 +65,7 @@ node /^managed/ {
   }
   wildfly::host::server_config { ['server-one', 'server-two']:
     ensure => absent,
+    before => Class['wildfly::setup'],
   }
   wildfly::host::server_config { 'app':
     server_group => 'app-server-group',
