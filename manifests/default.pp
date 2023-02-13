@@ -26,6 +26,10 @@ node /^standalone/ {
     },
     *          => $wildfly_defaults,
   }
+  wildfly::jgroups::stack::tcpping { 'TCPPING':
+   initial_hosts       => "${standalone_ip}[${mgmt_port}]",
+   num_initial_members => 1
+  }
 }
 
 node /^controller/ {
@@ -48,6 +52,10 @@ node /^controller/ {
   }
   wildfly::config::mgmt_user { 'managed':
     password => 'whatever',
+  }
+  wildfly::jgroups::stack::tcpping { 'TCPPING':
+    initial_hosts       => "${managed_ip}[${mgmt_port}]",
+    num_initial_members => 1
   }
 }
 
