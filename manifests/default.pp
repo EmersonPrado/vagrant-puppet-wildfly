@@ -2,6 +2,7 @@ $tmp_dir = '/tmp/wildfly'
 $standalone_ip = '192.168.56.4'
 $controller_ip = '192.168.56.5'
 $managed_ip = '192.168.56.6'
+$mgmt_port = '9990'
 
 file { $tmp_dir:
   ensure => directory,
@@ -23,6 +24,7 @@ node /^standalone/ {
   class { 'wildfly':
     properties => {
       'jboss.bind.address.management' => $standalone_ip,
+      'jboss.management.http.port'    => $mgmt_port,    # Needed for wildfly::jgroups::stack::tcpping
     },
     *          => $wildfly_defaults,
   }
@@ -38,7 +40,7 @@ node /^controller/ {
     host_config    => 'host-master.xml',
     properties     => {
       'jboss.bind.address.management' => $controller_ip,
-      'jboss.management.http.port'    => '9990',        # Needed for wildfly::resource below
+      'jboss.management.http.port'    => $mgmt_port,    # Needed for wildfly::domain::server_group below
     },
     external_facts => true,
     *              => $wildfly_defaults,
