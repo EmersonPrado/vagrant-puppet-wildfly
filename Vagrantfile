@@ -27,6 +27,7 @@ Vagrant.configure("2") do |config|
       vm.vm.provision :shell do |shell|
         shell.name = 'Install Puppet'
         shell.path = 'bin/install_puppet.sh'
+        shell.args = '5'
       end
 
       vm.vm.provision :puppet do |puppet|
