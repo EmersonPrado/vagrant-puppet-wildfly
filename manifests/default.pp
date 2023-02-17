@@ -29,10 +29,6 @@ node /^standalone/ {
     },
     *          => $wildfly_defaults,
   }
-  wildfly::jgroups::stack::tcpping { 'TCPPING':
-   initial_hosts       => "${standalone_ip}[${tcpp_port}]",
-   num_initial_members => 1
-  }
 }
 
 node /^controller/ {
@@ -56,9 +52,45 @@ node /^controller/ {
   wildfly::config::mgmt_user { 'managed':
     password => 'whatever',
   }
-  wildfly::jgroups::stack::tcpping { 'TCPPING':
-    initial_hosts       => "${managed_ip}[${tcpp_port}]",
-    num_initial_members => 1
+  wildfly::resource { '/subsystem=jgroups/stack=tcpping':
+    recursive => true,
+    content   => {
+      'protocol'  => wildfly::objectify([
+        'TCPPING',
+        'MERGE3',
+        { 'FD_SOCK' => { 'socket-binding' => 'jgroups-tcp-fd' } },
+        'FD',
+        'VERIFY_SUSPECT',
+        'pbcast.NAKACK2',
+        'UNICAST3',
+        'pbcast.STABLE',
+        'pbcast.GMS',
+        'UFC',
+        'MFC',
+        'FRAG2',
+        'RSVP',
+      ]),
+      'transport' => {
+        'TCP' => {
+          'socket-binding' => 'jgroups-tcp',
+        },
+      },
+    },
+  }
+  -> wildfly::resource { '/subsystem=jgroups/stack=tcpping/protocol=TCPPING':
+    content => {
+      'properties' => {
+        'initial_hosts'       => "${managed_ip}[${tcpp_port}]",
+        'timeout'             => 3000,
+        'num_initial_members' => 1,
+        'port_range'          => 0,
+      }
+    },
+  }
+  -> wildfly::resource { '/subsystem=jgroups':
+    content => {
+      'default-stack' => 'tcpping',
+    },
   }
 }
 
