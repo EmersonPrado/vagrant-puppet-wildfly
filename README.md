@@ -53,12 +53,12 @@ vagrant ssh standalone
 systemctl status wildfly
 # Answer should contain "Active: active (running)"
 
-sudo netstat -ptln | sed -n '1,2p;/java/p'
+sudo ss -ptln | sed -n '1p;/java/p'
 # Answer should be:
-Active Internet connections (only servers)
-Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
-tcp6       0      0 192.168.56.4:9990       :::*                    LISTEN      <PID>/java
-tcp6       0      0 127.0.0.1:8080          :::*                    LISTEN      <PID>/java
+State      Recv-Q Send-Q Local Address:Port               Peer Address:Port
+LISTEN     0      128     [::ffff:127.0.0.1]:8443                  [::]:*                   users:(("java",pid=<PID>,fd=<FD>))
+LISTEN     0      50      [::ffff:127.0.0.1]:9990                  [::]:*                   users:(("java",pid=<PID>,fd=<FD>))
+LISTEN     0      128     [::ffff:127.0.0.1]:8080                  [::]:*                   users:(("java",pid=<PID>,fd=<FD>))
 
 # Remember to close VM SSH session
 exit
@@ -85,13 +85,12 @@ vagrant ssh controller
 systemctl status wildfly
 # Answer should contain "Active: active (running)"
 
-sudo netstat -ptln | sed -n '1,2p;/java/p'
+sudo ss -ptln | sed -n '1p;/java/p'
 # Answer should be:
-Active Internet connections (only servers)
-Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
-tcp6       0      0 192.168.56.5:9990       :::*                    LISTEN      <PID>/java
-tcp6       0      0 192.168.56.5:9999       :::*                    LISTEN      <PID>/java
-tcp6       0      0 127.0.0.1:<Port>        :::*                    LISTEN      <PID>/java
+State      Recv-Q Send-Q Local Address:Port               Peer Address:Port
+LISTEN     0      50       [::ffff:192.168.56.5]:9990                  [::]:*                   users:(("java",pid=<PID>,fd=85))
+LISTEN     0      50      [::ffff:127.0.0.1]:<Port>                 [::]:*                   users:(("java",pid=<PID>,fd=18))
+LISTEN     0      50       [::ffff:192.168.56.5]:9999                  [::]:*                   users:(("java",pid=<PID>,fd=76))
 
 # Remember to close VM SSH session
 exit
