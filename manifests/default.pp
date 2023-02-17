@@ -83,5 +83,6 @@ node /^managed/ {
     hostname     => 'managed',
     username     => 'managed',
     password     => 'whatever',
+    require      => Class['wildfly::install'],
   }
 }
