@@ -96,6 +96,11 @@ Access the [web console](http://192.168.56.4:9990/console/App.html) in your brow
 Enter "Runtime" tab
 > There should be server "Standalone Server"
 
+Enter "Configuration" tab
+Click on Subsystems -> JGroups -> View
+Find "tcpping" and click on "View"
+Your settings should be there
+
 Remember to close the session: Admin -> Logout -> Confirm
 
 ### Domain mode
@@ -189,6 +194,11 @@ Enter "Runtime" tab
 
 - Hosts: there should be "managed" and "master"
 - Server Groups: there should be "app-server-group", with server "app"
+
+Enter "Configuration" tab
+Click on Configuration -> Profiles -> full-ha -> Subsystem -> JGroups -> View
+Find "tcpping" and click on "View"
+Your settings should be there
 
 Remember to close the session: Admin -> Logout -> Confirm
 
