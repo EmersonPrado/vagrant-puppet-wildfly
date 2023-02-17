@@ -23,6 +23,7 @@ $wildfly_defaults = {
 # The Admin Console listens to the management interface
 node /^standalone/ {
   class { 'wildfly':
+    config     => 'standalone-full-ha.xml',
     properties => {
       'jboss.bind.address.management' => $standalone_ip,
       'jboss.management.http.port'    => $mgmt_port,    # Needed for wildfly::jgroups::stack::tcpping
