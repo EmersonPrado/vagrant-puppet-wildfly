@@ -54,6 +54,7 @@ node /^controller/ {
   }
   wildfly::resource { '/subsystem=jgroups/stack=tcpping':
     recursive => true,
+    profile   => 'full-ha',
     content   => {
       'protocol'  => wildfly::objectify([
         'TCPPING',
@@ -78,6 +79,7 @@ node /^controller/ {
     },
   }
   -> wildfly::resource { '/subsystem=jgroups/stack=tcpping/protocol=TCPPING':
+    profile => 'full-ha',
     content => {
       'properties' => {
         'initial_hosts'       => "${managed_ip}[${tcpp_port}]",
@@ -88,6 +90,7 @@ node /^controller/ {
     },
   }
   -> wildfly::resource { '/subsystem=jgroups':
+    profile => 'full-ha',
     content => {
       'default-stack' => 'tcpping',
     },
