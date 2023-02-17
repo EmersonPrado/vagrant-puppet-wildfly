@@ -32,7 +32,7 @@ node /^standalone/ {
   }
   wildfly::jgroups::stack::tcpping { 'TCPPING':
     initial_hosts       => "${standalone_ip}[${tcpp_port}]",
-    num_initial_members => 1
+    num_initial_members => 1,
   }
 }
 
@@ -59,7 +59,8 @@ node /^controller/ {
   }
   wildfly::jgroups::stack::tcpping { 'TCPPING':
     initial_hosts       => "${managed_ip}[${tcpp_port}]",
-    num_initial_members => 1
+    num_initial_members => 1,
+    profile             => 'full-ha',
   }
 }
 
