@@ -60,6 +60,30 @@ LISTEN     0      128     [::ffff:127.0.0.1]:8443                  [::]:*       
 LISTEN     0      50      [::ffff:127.0.0.1]:9990                  [::]:*                   users:(("java",pid=<PID>,fd=<FD>))
 LISTEN     0      128     [::ffff:127.0.0.1]:8080                  [::]:*                   users:(("java",pid=<PID>,fd=<FD>))
 
+# See in `/opt/wildfly/standalone/configuration/standalone-full-ha.xml`:
+<server xmlns="urn:jboss:domain:3.0">
+  <extensions>
+    ...
+    <extension module="org.jboss.as.clustering.jgroups"/>
+    ...
+  </extensions>
+  ...
+  <profile>
+    ...
+    <subsystem xmlns="urn:jboss:domain:jgroups:3.0">
+      ...
+      <stacks default="tcpping">
+        ...
+        <stack name="tcpping">
+          <TCPPing stack settings>
+        </stack>
+      </stacks>
+    </subsystem>
+    ...
+  </profile>
+  ...
+</server>
+
 # Remember to close VM SSH session
 exit
 ```
@@ -92,6 +116,39 @@ LISTEN     0      50       [::ffff:192.168.56.5]:9990                  [::]:*   
 LISTEN     0      50      [::ffff:127.0.0.1]:<Port>                 [::]:*                   users:(("java",pid=<PID>,fd=18))
 LISTEN     0      50       [::ffff:192.168.56.5]:9999                  [::]:*                   users:(("java",pid=<PID>,fd=76))
 
+# See in /opt/wildfly/domain/configuration/domain.xml:
+<domain xmlns="urn:jboss:domain:3.0">
+  <extensions>
+    ...
+    <extension module="org.jboss.as.clustering.jgroups"/>
+  </extensions>
+  ...
+  <profiles>
+    ...
+    <profile name="full-ha">
+      ...
+      <subsystem xmlns="urn:jboss:domain:jgroups:3.0">
+        ...
+        <stacks default="tcpping">
+          ...
+          <stack name="tcpping">
+            <TCPPing stack settings>
+          </stack>
+        </stacks>
+      </subsystem>
+      ...
+    </profile>
+  </profiles>
+  ...
+  <server-groups>
+    <server-group name="app-server-group" profile="full-ha">
+      ...
+      <socket-binding-group ref="full-ha-sockets" port-offset="0"/>
+    </server-group>
+  </server-groups>
+
+</domain>
+
 # Remember to close VM SSH session
 exit
 
@@ -107,6 +164,17 @@ nmap -p9990,9999 192.168.56.5
 PORT     STATE SERVICE
 9990/tcp open  osm-appsrvr
 9999/tcp open  abyss
+
+# See in /opt/wildfly/domain/configuration/host-slave.xml
+<host xmlns="urn:jboss:domain:3.0">
+  ...
+  <servers>
+      <server name="app" group="app-server-group" auto-start="true">
+          <socket-bindings port-offset="0"/>
+      </server>
+  </servers>
+  ...
+</host>
 
 # Remember to close VM SSH session
 exit
