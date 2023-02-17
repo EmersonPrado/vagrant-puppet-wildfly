@@ -3,6 +3,7 @@ $standalone_ip = '192.168.56.4'
 $controller_ip = '192.168.56.5'
 $managed_ip = '192.168.56.6'
 $mgmt_port = '9990'
+$tcpp_port = '7600'
 
 file { $tmp_dir:
   ensure => directory,
@@ -29,7 +30,7 @@ node /^standalone/ {
     *          => $wildfly_defaults,
   }
   wildfly::jgroups::stack::tcpping { 'TCPPING':
-   initial_hosts       => "${standalone_ip}[${mgmt_port}]",
+   initial_hosts       => "${standalone_ip}[${tcpp_port}]",
    num_initial_members => 1
   }
 }
@@ -56,7 +57,7 @@ node /^controller/ {
     password => 'whatever',
   }
   wildfly::jgroups::stack::tcpping { 'TCPPING':
-    initial_hosts       => "${managed_ip}[${mgmt_port}]",
+    initial_hosts       => "${managed_ip}[${tcpp_port}]",
     num_initial_members => 1
   }
 }
