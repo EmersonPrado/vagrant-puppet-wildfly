@@ -30,8 +30,8 @@ node /^standalone/ {
     *          => $wildfly_defaults,
   }
   wildfly::jgroups::stack::tcpping { 'TCPPING':
-   initial_hosts       => "${standalone_ip}[${tcpp_port}]",
-   num_initial_members => 1
+    initial_hosts       => "${standalone_ip}[${tcpp_port}]",
+    num_initial_members => 1
   }
 }
 
