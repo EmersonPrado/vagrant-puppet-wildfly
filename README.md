@@ -60,7 +60,7 @@ LISTEN     0      128     [::ffff:127.0.0.1]:8443                  [::]:*       
 LISTEN     0      50      [::ffff:127.0.0.1]:9990                  [::]:*                   users:(("java",pid=<PID>,fd=<FD>))
 LISTEN     0      128     [::ffff:127.0.0.1]:8080                  [::]:*                   users:(("java",pid=<PID>,fd=<FD>))
 
-# See in `/opt/wildfly/standalone/configuration/standalone-full-ha.xml`:
+# See in /opt/wildfly/standalone/configuration/standalone-full-ha.xml:
 <server xmlns="urn:jboss:domain:3.0">
   <extensions>
     ...
@@ -126,6 +126,7 @@ LISTEN     0      50       [::ffff:192.168.56.5]:9999                  [::]:*   
   <extensions>
     ...
     <extension module="org.jboss.as.clustering.jgroups"/>
+    ...
   </extensions>
   ...
   <profiles>
