@@ -205,7 +205,6 @@ Remember to close the session: Admin -> Logout -> Confirm
 ## Limitations
 
 - Only tested with CentOS (Vagrant box [bento/centos-7](https://app.vagrantup.com/bento/boxes/centos-7)), Puppet 6 and Java JDK 9.0.1
-- JGroups still not implemented
 - Not much configurable (so far, aims very specific tests)
 - Might get some network domain and include in the VMs FQDNs
 - Issues a warning - apparently harmless - after resource `/Stage[main]/Wildfly::Install/File[/tmp/wildfly/wildfly-<Version>.tar.gz]/ensure`:
